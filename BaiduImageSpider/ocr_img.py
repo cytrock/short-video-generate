@@ -4,7 +4,7 @@ import requests
 
 root_path = os.path.abspath(os.path.dirname(__file__))
 
-DIRPATH = r"C:\Users\admin\workplace\short-video-generate\BaiduImageSpider\搞笑聊天 对话"
+DIRPATH = r"/Users/emmabeybey/Documents/short-video-generate/搞笑聊天 对话"
 
 
 def ocr_img_file(img_path):

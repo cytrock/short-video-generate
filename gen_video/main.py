@@ -1,6 +1,7 @@
 import os
 import json
 import random
+from tempfile import tempdir
 import time
 from base64 import b64decode
 import cv2
@@ -13,21 +14,21 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 
 # ocr 目录路径
-ocr_dir_path = r'C:\Users\admin\workplace\short-video-generate\BaiduImageSpider\ocr_result\funny_chat'
+ocr_dir_path = r'/Users/emmabeybey/Document/short-video-generate/BaiduImageSpider/ocr_result/搞笑聊天 对话'
 # 清理后的ocr结果
-clean_ocr_dir_path = r'C:\Users\admin\workplace\short-video-generate\gen_video\clean_ocr'
+clean_ocr_dir_path = r'/Users/emmabeybey/Document/short-video-generate/gen_video/clean_ocr'
 # 生成聊天图片的目录
-gen_image_dir_path = r'C:\Users\admin\workplace\short-video-generate\gen_video\wechat_images'
+gen_image_dir_path = r'/Users/emmabeybey/Document/short-video-generate/gen_video/wechat_images'
 # 生成视频的目录
-gen_video_dir_path = r'C:\Users\admin\workplace\short-video-generate\gen_video\wechat_videos'
-gen_video_dir_path2 = r'C:\Users\admin\workplace\short-video-generate\gen_video\wechat_videos2'
+gen_video_dir_path = r'/Users/emmabeybey/Document/short-video-generate/gen_video/wechat_videos'
+gen_video_dir_path2 = r'/Users/emmabeybey/Document/short-video-generate/gen_video/wechat_videos2'
 # 提取音频的目录
-sound_dir_path = r'C:\Users\admin\workplace\short-video-generate\gen_video\video_sounds'
+sound_dir_path = r'/Users/emmabeybey/Document/short-video-generate/Download/post/小E同学'
 
 def get_browser():
     url = 'http://127.0.0.1:5000/'
     root_path = os.path.abspath(os.path.dirname(__file__))
-    chrome_driver_path = os.path.join(root_path, 'chromedriver.exe')
+    chrome_driver_path = os.path.join(root_path, 'chromedriver')
     browser = webdriver.Chrome(executable_path=chrome_driver_path)
     browser.get(url)
     return browser
@@ -190,7 +191,7 @@ def gen_video_from_image():
 
 
 def get_sound_from_video():
-    video_has_sound_path = r'C:\Users\admin\workplace\short-video-generate\TikTokDownload\Download\post\情感聊天'
+    video_has_sound_path = r'/Users/emmabeybey/Documents/short-video-generate/TikTokDownload/Download/post/王大爷团队（聊天记录）'
     for video_name in os.listdir(video_has_sound_path):
         sound_name = video_name.split('.')[0]
         video_path = os.path.join(video_has_sound_path, video_name)
@@ -202,7 +203,9 @@ def get_sound_from_video():
 
 def add_sound_to_video():
     sound_paths = []
-    for sound_name in os.listdir(sound_dir_path):
+    # tempdir = os.listdir(sound_dir_path)
+    files = os.walk(sound_dir_path)
+    for sound_name in files:
         sound_path = os.path.join(sound_dir_path, sound_name)
         sound_paths.append(sound_path)
 
